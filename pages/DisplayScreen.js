@@ -23,6 +23,7 @@ export default function DisplayScreen({route, navigation}) {
         <Text><Text style={styles.bold}>Name: </Text>{firstName+" "+lastName}</Text>
         <Text><Text style={styles.bold}>Address: </Text>{address}</Text>
         <Text><Text style={styles.bold}>Phone Number: </Text>{phone}</Text>
+        <Text><Text style={styles.bold}>Email Address: </Text>{email}</Text>
         {image && <Image source={{ uri: image }} style={styles.picture} />}
         <View style={styles.container}> 
           <Button 

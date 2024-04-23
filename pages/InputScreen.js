@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, View, SafeAreaView, TextInput, Button, Alert, Image, ScrollView } from 'react-native';
+import { Text, View, SafeAreaView, TextInput, Button, Alert, ScrollView } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import styles from '../styles';
 
@@ -9,7 +9,6 @@ export default function InputScreen({navigation}) {
   const [address, setAddress] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
-/*   const [page, setPage] = useState('main'); */
   const [image, setImage] = useState(null);
 
   // handle what happens on button press
@@ -18,15 +17,20 @@ export default function InputScreen({navigation}) {
     console.log('Address:', address);
     console.log('Phone:', phone);
 
-    if (!firstName) {
+    if (!firstName.trim) {
       Alert.alert('Error','First name is missing');
-    } else if (!lastName) {
+    } else if (!lastName.trim) {
       Alert.alert('Error','Last name is missing');
-    } else if (!address) {
+    } else if (!address.trim) {
       Alert.alert('Error','Address is missing');
+    } else if (!email.trim) {
+      Alert.alert('Error','Phone number is missing');
+    } else if (!validateEmail(email)) {
+      Alert.alert('Error', 'Invalid email format')
     } else if (!phone) {
       Alert.alert('Error','Phone number is missing');
     } else {
+      // go to display page passing vars
       navigation.navigate('Display', { 
         firstName,
         lastName,
@@ -77,8 +81,15 @@ export default function InputScreen({navigation}) {
     }
   }
 
+  // phone number formatting regex
   const formatPhone = (input) => setPhone(input.replace(/^(\d{3})(\d{3})(\d{4})$/, '($1) $2-$3'));
 
+  // regex for validating the email address, returns true or false
+  function validateEmail(email) {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+  }
+  
   return (
     <>
       <SafeAreaView style={styles.title}>
@@ -107,12 +118,6 @@ export default function InputScreen({navigation}) {
             placeholder='Address' 
             onChangeText={text => setAddress(text)}
           />
-          <Text style={styles.padded}>Email Address:</Text>
-          <TextInput 
-            style={styles.input} 
-            placeholder='Email Address' 
-            onChangeText={text => setEmail(text)}
-          />
           <Text style={styles.padded}>Phone Number:</Text>
           <TextInput 
             style={styles.input} 
@@ -121,7 +126,12 @@ export default function InputScreen({navigation}) {
             onChangeText={text => formatPhone(text)}
             maxLength={10}
           />
-
+          <Text style={styles.padded}>Email Address:</Text>
+          <TextInput 
+            style={styles.input} 
+            placeholder='Email Address' 
+            onChangeText={text => setEmail(text)}
+          />
           <View style={styles.container}>
             <View style={styles.padded}>
               <Button 
@@ -150,45 +160,3 @@ export default function InputScreen({navigation}) {
     </>
   );
 }
-
-/* const styles = StyleSheet.create({
-  container: {
-    flex: 0.5,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    padding: 24,
-    justifyContent: 'flex-start',
-  },
-  title: {
-    height: 80,
-    width: Dimensions.get('window').width, 
-    backgroundColor: '#ded9ca',
-    alignItems: 'center',
-    padding: 16,
-    justifyContent: 'flex-end',
-  },
-  fields: {
-    flex: 6,
-    backgroundColor: '#fff',
-    padding: 36,
-    justifyContent: 'flex-start',
-  },
-  input: {
-    width: 300,
-    padding: 8,
-    backgroundColor: '#f5f5f5'
-  },
-  picture: {
-    alignItems: 'center',
-    width: 300,
-    height: 300,
-    marginTop: 20,
-    padding: 16,
-  },
-  padded: {
-    padding: 8
-  },
-  bold: {
-    fontWeight: 'bold'
-  }
-}); */
