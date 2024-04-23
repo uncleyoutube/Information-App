@@ -20,7 +20,7 @@ export default function InputScreen({navigation}) {
     } else if (!address.trim) {
       Alert.alert('Error','Address is missing');
     } else if (!email.trim) {
-      Alert.alert('Error','Phone number is missing');
+      Alert.alert('Error','Email address is missing');
     } else if (!validateEmail(email)) {
       Alert.alert('Error', 'Invalid email format')
     } else if (!phone) {
