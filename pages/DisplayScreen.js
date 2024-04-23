@@ -1,9 +1,15 @@
 import React from 'react';
-import { View, Text, Button } from 'react-native';
-import styles from './styles';
+import { View, Text, SafeAreaView, Button, Image } from 'react-native';
+import styles from '../styles';
 
 export default function DisplayScreen({route, navigation}) {
-  const { info } = route.params;
+  const { firstName,
+    lastName,
+    address,
+    email,
+    phone,
+    image 
+  } = route.params;
 
   return (
     <>
@@ -22,10 +28,7 @@ export default function DisplayScreen({route, navigation}) {
           <Button 
             title='Back'
             style={{padding: 10}}
-            onPress={() => {
-              setImage(null);
-              setPage('main');
-            }}
+            onPress={() => navigation.goBack()}
           />
         </View>
       </View>

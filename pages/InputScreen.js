@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Dimensions, SafeAreaView, TextInput, Button, Alert, Image } from 'react-native';
+import { Text, View, SafeAreaView, TextInput, Button, Alert, Image, ScrollView } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
-import styles from './styles';
+import styles from '../styles';
 
 export default function InputScreen({navigation}) {
   const [firstName, setFirstName] = useState('');
@@ -9,7 +9,7 @@ export default function InputScreen({navigation}) {
   const [address, setAddress] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
-  const [page, setPage] = useState('main');
+/*   const [page, setPage] = useState('main'); */
   const [image, setImage] = useState(null);
 
   // handle what happens on button press
@@ -21,13 +21,20 @@ export default function InputScreen({navigation}) {
     if (!firstName) {
       Alert.alert('Error','First name is missing');
     } else if (!lastName) {
-        Alert.alert('Error','Last name is missing');
+      Alert.alert('Error','Last name is missing');
     } else if (!address) {
       Alert.alert('Error','Address is missing');
     } else if (!phone) {
       Alert.alert('Error','Phone number is missing');
     } else {
-      console.log('button pressed');
+      navigation.navigate('Display', { 
+        firstName,
+        lastName,
+        address,
+        email,
+        phone,
+        image
+      });
     }
   }
 
@@ -73,11 +80,11 @@ export default function InputScreen({navigation}) {
   const formatPhone = (input) => setPhone(input.replace(/^(\d{3})(\d{3})(\d{4})$/, '($1) $2-$3'));
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <>
-        <SafeAreaView style={styles.title}>
-          <Text style={{fontWeight: 'bold', justifyContent: 'center'}}>Ryan React Native Demo</Text>
-        </SafeAreaView>
+    <>
+      <SafeAreaView style={styles.title}>
+        <Text style={{fontWeight: 'bold', justifyContent: 'center'}}>Ryan React Native Demo</Text>
+      </SafeAreaView>
+      <ScrollView>
         <View style={styles.container}>
           <Text style={{fontWeight: 'bold'}}>Please fill out the below fields.</Text>
         </View>
@@ -139,8 +146,8 @@ export default function InputScreen({navigation}) {
             />
           </View>
         </View>
-      </>
-    </View>
+      </ScrollView>
+    </>
   );
 }
 
