@@ -81,7 +81,7 @@ export default function InputScreen({navigation}) {
   const formatPhone = (input) => setPhone(input.replace(/^(\d{3})(\d{3})(\d{4})$/, '($1) $2-$3'));
 
   // regex for validating the email address, returns true or false
-  function validateEmail(email) {
+  const  validateEmail = (email) => {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return regex.test(email);
   }
