@@ -13,10 +13,6 @@ export default function InputScreen({navigation}) {
 
   // handle what happens on button press
   const handleButton = () => {
-    console.log('Name:', firstName+' '+lastName);
-    console.log('Address:', address);
-    console.log('Phone:', phone);
-
     if (!firstName.trim) {
       Alert.alert('Error','First name is missing');
     } else if (!lastName.trim) {
