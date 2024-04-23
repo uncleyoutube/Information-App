@@ -3,7 +3,8 @@ import { View, Text, SafeAreaView, Button, Image } from 'react-native';
 import styles from '../styles';
 
 export default function DisplayScreen({route, navigation}) {
-  const { firstName,
+  const { 
+    firstName,
     lastName,
     address,
     email,
