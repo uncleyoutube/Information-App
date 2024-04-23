@@ -4,6 +4,8 @@ This is a React Native application that prompts the user for a few pieces of inf
 
 ## Installation
 
+**Note:** Node.JS will be required to run this application.
+
 1. Clone repository: `git clone https://github.com/uncleyoutube/Information-App.git`
 2. Navigate to the directory: `cd Information-App`
 3. Install dependencies: `npm install`
